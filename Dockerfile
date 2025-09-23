@@ -41,7 +41,7 @@ LABEL org.opencontainers.image.licenses=${IMAGE_LICENSES}
 LABEL org.opencontainers.image.source=${IMAGE_SOURCE}
 
 ENV BINDIR /erts/bin
-ENV LANG C.UTF-8
+ENV LANG C.utf8
 ENV SHELL /bin/sh
 ENV TZ GMT
 
