@@ -27,7 +27,7 @@ RUN mkdir -p /${GITHUB_REPOSITORY}
 WORKDIR /${GITHUB_REPOSITORY}
 ADD / /${GITHUB_REPOSITORY}/
 RUN ${BUILD_COMMAND}
-RUN beam-docker-release-action/mkimage
+RUN bin/mkimage
 
 
 FROM scratch
@@ -40,16 +40,16 @@ LABEL org.opencontainers.image.description=${IMAGE_DESCRIPTION}
 LABEL org.opencontainers.image.licenses=${IMAGE_LICENSES}
 LABEL org.opencontainers.image.source=${IMAGE_SOURCE}
 
-ENV BINDIR /erts/bin
-ENV LANG C.utf8
-ENV SHELL /bin/sh
-ENV TZ GMT
+ENV BINDIR=/erts/bin
+ENV LANG=C.utf8
+ENV SHELL=/bin/sh
+ENV TZ=GMT
 
 # elixir - note that .config is not present on RELEASE_SYS_CONFIG
-ENV RELEASE_SYS_CONFIG /release/sys
-ENV RELEASE_VM_ARGS /release/vm.args
-ENV RELEASE_ROOT /
-ENV PHX_SERVER true
+ENV RELEASE_SYS_CONFIG=/release/sys
+ENV RELEASE_VM_ARGS=/release/vm.args
+ENV RELEASE_ROOT=/
+ENV PHX_SERVER=true
 
 
 ENTRYPOINT ["/erts/bin/erlexec", "-boot_var", "ERTS_LIB_DIR", "/lib", "-boot_var", "RELEASE_LIB", "/lib", "-boot", "/release/start", "-noinput", "-config", "/release/sys.config", "-args_file", "/release/vm.args"]
