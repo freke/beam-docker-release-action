@@ -132,18 +132,13 @@ app(#{name := erlang_mk}) ->
     [Filename] = filelib:wildcard("ebin/*.app"),
     Filename;
 
-app(#{name := mix}) ->
+app(#{name := Name}) when Name == mix orelse Name == rebar ->
     ["_build", _, "rel", Release] = filename:split(filelib:wildcard("_build/*/rel/*")),
     [Filename] = filelib:wildcard(filename:join(
                                     ["_build/*/rel/*/lib",
                                      Release ++ "-*",
                                      "ebin/*.app"])),
-    Filename;
-
-app(#{name := rebar}) ->
-    [Filename] = filelib:wildcard("src/*.app.src"),
     Filename.
-
 
 copy_bin(Binaries,
          #{build := #{prefix := Prefix},
