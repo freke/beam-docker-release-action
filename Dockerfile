@@ -27,7 +27,7 @@ RUN mkdir -p /${GITHUB_REPOSITORY}
 WORKDIR /${GITHUB_REPOSITORY}
 ADD / /${GITHUB_REPOSITORY}/
 RUN ${BUILD_COMMAND}
-RUN bin/mkimage
+RUN beam-docker-release-action/mkimage
 
 
 FROM scratch
