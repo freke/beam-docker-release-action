@@ -133,7 +133,8 @@ app(#{name := erlang_mk}) ->
     Filename;
 
 app(#{name := Name}) when Name == mix orelse Name == rebar ->
-    ["_build", _, "rel", Release] = filename:split(filelib:wildcard("_build/*/rel/*")),
+    [RelDir] = filelib:wildcard("_build/*/rel/*"),
+    ["_build", _, "rel", Release] = filename:split(RelDir),
     [Filename] = filelib:wildcard(filename:join(
                                     ["_build/*/rel/*/lib",
                                      Release ++ "-*",
